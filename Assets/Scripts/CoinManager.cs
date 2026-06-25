@@ -4,7 +4,7 @@ public class CoinManager : MonoBehaviour
 {
     [SerializeField] private int MaxCoin = 100;
 
-    public int CurrentCoin { get; private set; }
+    public int CurrentCoin;
 
 
     private void Awake()
