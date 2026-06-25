@@ -1,10 +1,12 @@
+using System.Net.NetworkInformation;
 using UnityEngine;
-
+using TMPro;
 public class SlotMachineManager : MonoBehaviour
 {
     [SerializeField] private SlotGenerator Slot; // Used to generate the Target Symbols for the Reels.
     [SerializeField] private CoinManager CoinManager; // Used to manage the Coins and to check if the Player has enough Coins to Spin.
     [SerializeField] private Animator HandleAnimator; // Used to animate the Slot Machine Handle when the Player presses the Spin Button.
+    [SerializeField] private TMP_Text Win_And_Loose_Status;  // Used to display the Current Coin Amount in the UI.
 
     // Reel Controllers for the Left, Right and Centre Reels. These are used to control the Reel Animations and to stop the Reels at the Target Symbol.
     [SerializeField] private ReelController LeftReel; 
@@ -49,21 +51,37 @@ public class SlotMachineManager : MonoBehaviour
            CurrentResult[1] == CurrentResult[2])
         {
             CoinManager.AddAmount(100);
-
-            Debug.Log("WIN!");
+            Win();           
         }
         else if (CurrentResult[1] == CurrentResult [0] || CurrentResult[1] == CurrentResult[2] || CurrentResult[0] == CurrentResult[2])
         {
             CoinManager.AddAmount(50);
-            Debug.Log("WIN!");
+            Win();         
         }
         else
         {
-            Debug.Log("LOSE!");
+            Loose();    
         }
+        Invoke("Null", 2f);
     }
     void StopHandleAnimation()
     {
         HandleAnimator.SetBool("Spin", false);
+    }
+    void JackPot()
+    {
+        Win_And_Loose_Status.text = "JACKPOT";
+    }
+    void Win()
+    {
+        Win_And_Loose_Status.text = "WIN!";
+    }
+    void Loose()
+    {
+        Win_And_Loose_Status.text = "LOOSE!";
+    }
+    void Null()
+    {
+        Win_And_Loose_Status.text = "";
     }
 }
