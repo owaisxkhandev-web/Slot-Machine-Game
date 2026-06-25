@@ -13,17 +13,10 @@ public class SlotGenerator : MonoBehaviour
             Random.Range(0, 4),
             Random.Range(0, 4)
 
-            // 0 - Bell 
-            // 1 - Cherry
-            // 2 - Seven 
-            // 3 - Bar
+            // 0 - Cherry
+            // 1 - Seven 
+            // 2 - Bar
+            // 3 - Bell
         };
-    }
-
-    private void Update()
-    {
-        Slot = Generator();
-
-        Debug.Log($"Slot 1: {Slot[0]}, Slot 2: {Slot[1]}, Slot 3: {Slot[2]}");
     }
 }
