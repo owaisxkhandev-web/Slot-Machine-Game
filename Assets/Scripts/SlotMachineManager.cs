@@ -35,11 +35,32 @@ public class SlotMachineManager : MonoBehaviour
             Invoke("StopHandleAnimation",0.1f); // didn't have time for this, so just using a timer to stop the handle animation after 0.2 seconds.
 
             Debug.Log(CoinManager.CurrentCoin);
+
+            Invoke("CheckReward",3f);
         }
         else if (!CoinManager.CanSpin(SpinCost)) // not have enough coins
         {
             Debug.Log("Not Enough Coins");
         }      
+    }
+    private void CheckReward()
+    {
+        if (CurrentResult[0] == CurrentResult[1] &&
+           CurrentResult[1] == CurrentResult[2])
+        {
+            CoinManager.AddAmount(100);
+
+            Debug.Log("WIN!");
+        }
+        else if (CurrentResult[1] == CurrentResult [0] || CurrentResult[1] == CurrentResult[2] || CurrentResult[0] == CurrentResult[2])
+        {
+            CoinManager.AddAmount(50);
+            Debug.Log("WIN!");
+        }
+        else
+        {
+            Debug.Log("LOSE!");
+        }
     }
     void StopHandleAnimation()
     {
